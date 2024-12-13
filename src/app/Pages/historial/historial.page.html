@@ -1,0 +1,70 @@
+<ion-header>
+  <!-- Componente del toolbar compartido -->
+  <app-toolbar></app-toolbar>
+  <ion-toolbar>
+    <ion-button slot="start" id="open-loading" routerLink="/home">
+      <ion-icon name="caret-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title style="text-align: center">Historial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Barra de búsqueda -->
+  <ion-searchbar [(ngModel)]="searchText" (ionInput)="filterProducts()" debounce="300" showClearButton="true" placeholder="Buscar productos..."></ion-searchbar>
+
+  <!-- Opciones de filtrado y ordenación -->
+  <div class="filters-container">
+    <ion-list>
+      <ion-item>
+        <ion-label>Categoría</ion-label>
+        <ion-select placeholder="Seleccionar" (ionChange)="filtrarPorCategoria($event.detail.value)">
+          <ion-select-option value="all">Todos</ion-select-option>
+          <ion-select-option value="electronics">Electrónica</ion-select-option>
+          <ion-select-option value="jewelery">Joyería</ion-select-option>
+          <ion-select-option value="men's clothing">Hombres</ion-select-option>
+          <ion-select-option value="women's clothing">Mujeres</ion-select-option>
+        </ion-select>
+      </ion-item>
+    
+      <!-- Ordenar por precio -->
+      <ion-item>
+        <ion-label>Ordenar</ion-label>
+        <ion-select placeholder="Seleccionar" (ionChange)="ordenarProductosPorPrecio($event.detail.value)">
+          <ion-select-option value="asc">Precio Ascendente</ion-select-option>
+          <ion-select-option value="desc">Precio Descendente</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" (click)="mostrarProductosMejorCalificados()">Productos Destacados</ion-button>
+  </div>
+
+  <!-- Lista de productos filtrados -->
+  <ion-list>
+    <ion-item *ngFor="let item of filteredProducts">
+      <ion-label>{{ item.title }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Lista completa de productos -->
+  <div class="products-container">
+    <ion-card *ngFor="let item of filteredProducts; trackBy: trackById">
+      <ion-card-header>
+        <ion-card-title>{{ item.title }}</ion-card-title>
+        <ion-card-subtitle>{{ item.category }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Muestra el precio del item -->
+        <p>Precio: ${{ item.price }}</p>
+        <!-- Muestra el rating y número de reviews -->
+        <p>Rating: {{ item.rating.rate }} ({{ item.rating.count }} reviews)</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<!-- Componente de loading personalizado -->
+<ion-loading class="custom-loading" trigger="open-loading" message="Cargando..." [duration]="1000"></ion-loading>
+
+<!-- Componente del footer compartido -->
+<app-footer></app-footer>

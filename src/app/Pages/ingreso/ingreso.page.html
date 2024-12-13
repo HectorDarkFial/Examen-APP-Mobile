@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <app-toolbar></app-toolbar>
+    <ion-toolbar>
+      <h2 style="text-align: center;">Ingreso de Productos</h2>
+      <ion-button slot="start" id="open-loading" routerLink="/home">
+        <ion-icon name="caret-back-outline"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>Lista de Productos</ion-label>
+      </ion-item-divider>
+      <ion-item *ngFor="let item of productos">
+        <ion-label>
+          Producto: {{ item.nombre }}<br />
+          Pallet N°: {{ item.pallet }}<br />
+          SKU: {{ item.sku }}
+        </ion-label>
+        <ion-checkbox slot="end"></ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+  </div>
+
+  <ion-list>
+    <!-- Sección del formulario -->
+    <ion-item-group>
+      <br>
+      <ion-item-divider>
+        <ion-label>Formulario de Ingreso</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label position="floating">Producto</ion-label>
+        <ion-input [(ngModel)]="nuevoProducto.nombre" name="producto" required></ion-input>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label position="floating">Pallet N°</ion-label>
+        <ion-input [(ngModel)]="nuevoProducto.pallet" name="pallet" required></ion-input>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label position="floating">SKU</ion-label>
+        <ion-input [(ngModel)]="nuevoProducto.sku" name="sku" required></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+
+
+        <ion-button  fill="clear" expand="block" (click)="ingresarProducto()" color="primary">Agregar Producto</ion-button>
+      </ion-item>
+    </ion-item-group>
+
+  </ion-list>
+
+  <!-- Botones inferiores -->
+  <div style="display: flex; justify-content: space-between; padding: 10px;">
+    <ion-loading class="custom-loading" trigger="open-loading" message="Loading..." [duration]="1000"></ion-loading>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>

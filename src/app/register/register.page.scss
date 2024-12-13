@@ -1,0 +1,34 @@
+.ion-content {
+    --background: linear-gradient(to bottom, #007bff, #1d3557); /* Fondo con gradiente */
+    display: flex; /* Flexbox para centrar */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura completa */
+
+    .ion-card {
+    background-color: #fff; /* Fondo blanco para el card */
+    border-radius: 1rem; /* Bordes redondeados */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra */
+    width: 100%; /* Ancho completo */
+    max-width: 400px; /* Ancho máximo */
+    padding: 1rem; /* Espaciado interno */
+    }
+
+    .ion-item {
+    --background: transparent; /* Fondo transparente para los ítems */
+    --border-color: #e0e0e0; /* Color del borde */
+    }
+
+    .ion-button {
+    --border-radius: 1rem; /* Bordes redondeados */
+
+    &.primary-button {
+        --background: #007bff; /* Fondo azul para el botón primario */
+        --color: #fff; /* Texto blanco */
+    }
+
+    &.secondary-button {
+        --color: #6c757d; /* Color gris para el texto del botón secundario */
+    }
+    }
+}
